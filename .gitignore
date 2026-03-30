@@ -1,0 +1,9 @@
+venv/
+.env
+__pycache__/
+*.pyc
+logs/
+data/
+airflow/airflow.db
+airflow/simple_auth_manager_passwords.json.generated
+grafana-enterprise*
