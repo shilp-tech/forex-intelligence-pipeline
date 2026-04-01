@@ -25,7 +25,7 @@ with engine.connect() as connection:
     result = connection.execute(text("""
         SELECT date, close, sma_7, daily_change_pct, volatility
         FROM forex_rates
-        WHERE currency_pair = 'EUR/USD'
+        WHERE currency_pair = 'USD/INR'
         ORDER BY date DESC
         LIMIT 7
     """))
@@ -35,7 +35,7 @@ with engine.connect() as connection:
 latest = df.iloc[0]
 
 # Build the email subject
-subject = f"Forex Daily Report — EUR/USD {latest['date'].strftime('%Y-%m-%d')}"
+subject = f"Forex Daily Report — USD/INR {latest['date'].strftime('%Y-%m-%d')}"
 
 # Build the email body in HTML so it looks professional
 html_body = f"""
@@ -43,7 +43,7 @@ html_body = f"""
 <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
 
 <h2 style="color: #2c3e50;">Forex Intelligence Report</h2>
-<h3 style="color: #7f8c8d;">EUR/USD — {latest['date'].strftime('%B %d, %Y')}</h3>
+<h3 style="color: #7f8c8d;">USD/INR — {latest['date'].strftime('%B %d, %Y')}</h3>
 
 <table style="width:100%; border-collapse: collapse; margin: 20px 0;">
   <tr style="background-color: #3498db; color: white;">

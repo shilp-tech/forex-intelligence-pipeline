@@ -12,7 +12,7 @@ db_name     = os.getenv("DB_NAME")
 db_user     = os.getenv("DB_USER")
 db_password = os.getenv("DB_PASSWORD")
 
-url = f"https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&apikey={api_key}"
+url = f"https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=USD&to_symbol=INR&apikey={api_key}"
 response = requests.get(url)
 data = response.json()
 
@@ -28,7 +28,7 @@ df.index.name = "date"
 df = df.reset_index()
 df["date"] = pd.to_datetime(df["date"])
 df = df.sort_values("date").reset_index(drop=True)
-df["currency_pair"] = "EUR/USD"
+df["currency_pair"] = "USD/INR"
 
 print(f"Fetched {len(df)} rows from API")
 

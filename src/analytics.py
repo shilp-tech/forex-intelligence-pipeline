@@ -14,7 +14,7 @@ connection_string = f"postgresql://{db_user}:{db_password}@{db_host}:5432/{db_na
 engine = create_engine(connection_string)
 
 with engine.connect() as connection:
-    result = connection.execute(text("SELECT * FROM forex_rates ORDER BY date ASC"))
+    result = connection.execute(text("SELECT * FROM forex_rates WHERE currency_pair = 'USD/INR' ORDER BY date ASC"))
     df = pd.DataFrame(result.fetchall(), columns=result.keys())
 
 print(f"Loaded {len(df)} rows from database")
@@ -53,7 +53,7 @@ with engine.begin() as connection:
                 daily_change_pct = :daily_change_pct,
                 volatility       = :volatility,
                 volatility_7d    = :volatility_7d
-            WHERE date = :date AND currency_pair = :currency_pair
+            WHERE date = :date AND currency_pair = 'USD/INR'
         """)
         connection.execute(sql, {
             "sma_7":            None if pd.isna(row["sma_7"]) else row["sma_7"],
@@ -62,8 +62,7 @@ with engine.begin() as connection:
             "daily_change_pct": row["daily_change_pct"],
             "volatility":       row["volatility"],
             "volatility_7d":    None if pd.isna(row["volatility_7d"]) else row["volatility_7d"],
-            "date":             row["date"],
-            "currency_pair":    row["currency_pair"]
+            "date":             row["date"]
         })
         updated += 1
 
