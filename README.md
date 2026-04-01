@@ -1,9 +1,8 @@
 # Forex Intelligence Pipeline
 
-An end-to-end automated data engineering pipeline that ingests live EUR/USD 
-exchange rate data, stores it in a cloud database, computes financial analytics, 
-detects anomalies using machine learning, and delivers a live dashboard plus 
-automated daily email reports.
+An end-to-end automated data engineering pipeline that ingests live USD/INR
+exchange rate data, stores it in a cloud database, computes financial analytics,
+and delivers a live dashboard plus automated daily email reports.
 
 ## Architecture
 ```
@@ -26,7 +25,7 @@ AWS RDS PostgreSQL → Analytics Engine → Grafana Dashboard
 
 ## Features
 
-- **Live data ingestion** — pulls EUR/USD OHLC data daily from Alpha Vantage API
+- **Live data ingestion** — pulls USD/INR OHLC data daily from Alpha Vantage API
 - **Idempotent pipeline** — UPSERT logic prevents duplicate data on every run
 - **Financial analytics** — computes SMA-7, SMA-14, daily volatility, daily change %
 - **Automated scheduling** — cron job runs full pipeline every day at 9am
@@ -87,7 +86,7 @@ python src/analytics.py
 ## Dashboard
 
 Live Grafana dashboard showing:
-- EUR/USD price with 7-day and 14-day moving averages
+- USD/INR price with 7-day and 14-day moving averages
 - Daily volatility trends
 - Daily change percentage bars
 
